@@ -1,1 +1,3 @@
 # futurewater
+
+Welcome to the *futurewater* repository! futurewater is a way to engage in novel streamflow forecasting techniques. It uses a variety of inputs and tools shared by other scientists. Chiefly, the code uses as its base meteorological dataset that provided by John Abatzoglou and Katherine Hegewisch at the University of Idaho. The machine learning code is based upon the wonderful example provided by Freddy Kratzert in this notebook: https://github.com/kratzert/pangeo_lstm_example. The streamflow observations are provided by the River Management Joint Operating Committee here: https://www.bpa.gov/p/Power-Products/Historical-Streamflow-Data/Pages/No-Regulation-No-Irrigation-Data.aspx.
