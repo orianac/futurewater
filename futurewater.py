@@ -23,14 +23,18 @@ import cftime
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu") # This line checks if GPU is available
 WATERFORAG_ROOT = Path('/pool0/data/orianac/waterforag/')
 
-def load_historical_forcing():
+def load_historical_forcing(end_date: str):
+    '''This will grab the historical forcing file and grab the observed
+    meteorology for the 180 days leading up to the end_date specified. This
+    will be combined with the forecasts to provide a continuous timeseries
+    of meteorology.
+    '''
     ds = 'an xarray dataset with all variables for the subbasin of interest'
     return ds
 
 def load_hindcasted_forcing(ensemble_member: str):
     forcing_path = WATERFORAG_ROOT / 'meteorology' / 'hindcasts' / 'netcdf'
     files = list(glob.glob(f"{str(forcing_path)}/YAKIMA_bcsd_nmme_hindcasts_CFSv2_ENS{ensemble_member}_*.nc"))
-    print(forcing_path)
     if len(files) == 0:
         raise RuntimeError(f'No forcing file file found for ensemble member {ensemble_member}')
     ds = xr.open_mfdataset(files)
@@ -52,6 +56,15 @@ class gridmet_NMME(Dataset):
     def _load_data(self):
         """Load input and output data from text files."""
         ds = load_hindcasted_forcing(self.ensemble_member)
+        # want to add the historical forcings as well like this:
+        # ds_historical = load_historical_forcing(self.end_date)
+        
+        # here we'll want to subset the forcing for the specific basin we're working with
+        # like this:
+        # ds_subset = mask(ds, basin_mask)
+        
+
+        # add the code that converts the forcings into the 
         return ds
 ensemble_member = '23'
 ds_train = gridmet_NMME(ensemble_member)
