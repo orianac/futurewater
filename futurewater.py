@@ -39,21 +39,15 @@ def load_hindcasted_forcing(ensemble_member: str):
 class gridmet_NMME(Dataset):
 # this class will house the datasets to be used for training and validation for a selected basin
 # it is specific to the gridmet historical dataset and the NMME climate forecasts
-    def __init__(self, ensemble_member: str):
+    def __init__(self, ensemble_member: str, period: str=None):
         """Initialize Dataset containing the data of a single basin.
 
         :param ensemble_member: string of integer from 1 to 24 (non zero-padded)
                                 denoting the ensemble member of the data in use.
         """
         self.ensemble_member = ensemble_member
-
-
-    def __init__(self, ensemble_member: str, period: str=None):
-        self.ensemble_member = ensemble_member
         self.period = period
-           # load data into memory
         self.meteorology = self._load_data()
-
 
     def _load_data(self):
         """Load input and output data from text files."""
