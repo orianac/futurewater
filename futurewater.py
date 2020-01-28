@@ -44,7 +44,10 @@ def load_hindcasted_forcing(ensemble_member: str):
     ds = xr.open_mfdataset(files)
     return ds
 
-def load_historical_streamflow(
+def load_historical_streamflow(year: str, location: str):
+    # load in the streamflow dataset
+    # extract streamflow for that year and the selected location
+    return 'historical'
 
 class gridmet_NMME(Dataset):
 # this class will house the datasets to be used for training and validation for a selected basin
