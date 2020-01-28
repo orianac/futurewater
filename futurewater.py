@@ -30,6 +30,10 @@ def load_historical_forcing(end_date: str):
     of meteorology.
     '''
     ds = 'an xarray dataset with all variables for the subbasin of interest'
+    # extract the time period that runs up until the first day of hindcast
+    # denoted by "end_date"
+    # return the extracted dataset in a format aligning with the hindcast
+   
     return ds
 
 def load_hindcasted_forcing(ensemble_member: str):
@@ -39,6 +43,8 @@ def load_hindcasted_forcing(ensemble_member: str):
         raise RuntimeError(f'No forcing file file found for ensemble member {ensemble_member}')
     ds = xr.open_mfdataset(files)
     return ds
+
+def load_historical_streamflow(
 
 class gridmet_NMME(Dataset):
 # this class will house the datasets to be used for training and validation for a selected basin
@@ -66,7 +72,7 @@ class gridmet_NMME(Dataset):
             # convert to basin mean values
 
         # add the code that converts the forcings into the shape appropriate for pytorch
-        
+        # load_streamflow for the location 
         return ds
 
 class Model(nn.Module):
